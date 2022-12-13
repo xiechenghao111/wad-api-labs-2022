@@ -18,6 +18,14 @@ router.post('/',asyncHandler( async (req, res, next) => {
       return next();
     }
     if (req.query.action === 'register') {
+      var password = req.body.password;
+      if (password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)){
+        res.status(201).json({code: 201, msg: 'Successful created new user.'});
+      
+      }
+      else{
+        res.status(401).json({code: 401,msg: 'Authentication failed. Wrong password.'});
+      }
       await User.create(req.body);
       res.status(201).json({code: 201, msg: 'Successful created new user.'});
     } else {
@@ -52,14 +60,25 @@ router.post('/:userName/favourites', asyncHandler(async (req, res) => {
     const userName = req.params.userName;
     const movie = await movieModel.findByMovieDBId(newFavourite);
     const user = await User.findByUserName(userName);
-    await user.favourites.push(movie._id);
-    await user.save(); 
-    res.status(201).json(user); 
-  }));
+    if (!user.favourites) {
+        await user.favourites.push(movie._id);
+        await user.save();
+        res.status(201).json(user);
+      } else if (!user.favourites.includes(movie._id)) {
+        await user.favourites.push(movie._id);
+        await user.save();
+        res.status(201).json(user);
+      } else {
+        res.status(401).json({ code: 401, msg: 'Duplicate favo' });
+      }
+    
+    }));
+
   router.get('/:userName/favourites', asyncHandler( async (req, res) => {
     const userName = req.params.userName;
     const user = await User.findByUserName(userName).populate('favourites');
     res.status(200).json(user.favourites);
   }));
+  
 
 export default router;
