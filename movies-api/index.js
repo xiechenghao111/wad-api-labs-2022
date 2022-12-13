@@ -5,6 +5,9 @@ import genresRouter from './api/genres';
 import usersRouter from './api/users';
 import './db';
 import './seedData';
+import session from 'express-session';
+import authenticate from './authenticate';
+
 dotenv.config();
 const errHandler = (err, req, res, next) => {
   /* if the error in development then send stack trace to display whole error,
@@ -15,12 +18,18 @@ const errHandler = (err, req, res, next) => {
   res.status(500).send(`Hey!! You caught the error 👍👍. Here's the details: ${err.stack} `);
 };
 const app = express();
+app.use(session({
+  secret: 'ilikecake',
+  resave: true,
+  saveUninitialized: true
+}));
 
 const port = process.env.PORT;
 app.use(express.json());
 app.use('/api/movies', moviesRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/movies', authenticate, moviesRouter);
 app.use(errHandler);
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
