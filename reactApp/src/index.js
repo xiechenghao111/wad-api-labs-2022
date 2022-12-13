@@ -7,7 +7,7 @@ import LoginPage from "./loginPage";
 import AuthProvider from "./authContext";
 import AuthHeader from "./authHeader";
 import ProtectedRoutes from "./protectedRoutes";
-
+import SignUpPage from "./signUpPage";
 const App = () => {
   return (
     <BrowserRouter>
@@ -38,6 +38,7 @@ const App = () => {
           </Route>
 
           <Route path="*" element={ <Navigate to="/" /> } />
+          <Route path="/signup" element={ <SignUpPage /> } />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
