@@ -2,7 +2,7 @@ export const getMovies = (args) => {
   const[,pages] = args.queryKey;
   const{page} = pages;
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=cd337e2cdf6450aa6801acff1fa9bee5&language=en-US&include_adult=false&include_video=false&page=${page}`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -19,7 +19,7 @@ export const getMovie = (args) => {
   const [, idPart] = args.queryKey;
   const { id } = idPart;
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    `https://api.themoviedb.org/3/movie/${id}?api_key=cd337e2cdf6450aa6801acff1fa9bee5`
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);
@@ -203,7 +203,7 @@ export const getMovie = (args) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `https://api.themoviedb.org/3/movie/${id}/images?api_key=cd337e2cdf6450aa6801acff1fa9bee5`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -227,7 +227,7 @@ export const getMovie = (args) => {
   };
   export const getMovieReviews = (id) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=cd337e2cdf6450aa6801acff1fa9bee5`
     )
       .then((res) => res.json())
       .then((json) => {

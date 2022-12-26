@@ -74,4 +74,5 @@
     "start-server-and-test": "^1.14.0",
     "webpack": "^5.74.0"
   }
+  ,"proxy":"http://localhost:8080"
 }

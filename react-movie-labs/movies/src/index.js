@@ -19,6 +19,9 @@ import TVPage from "./pages/TVPage";
 import TVDetailPage from "./pages/TVDetailPage";
 import LoginPage from "./pages/loginPage";
 import {Auth0Provider} from '@auth0/auth0-react';
+import AuthProvider from "./authContext";
+import AuthHeader from "./authHeader";
+import ProtectedRoutes from "./protectedRoutes";
 
 const domain = "dev-emaoq2008zqrl4p3.uk.auth0.com";
 const clientId = "232E8LCYVa6I2V4TBf7mR0lHnx9W2nUq";
@@ -36,6 +39,8 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
+    <AuthProvider>
+        <AuthHeader />
     <SiteHeader />
     <MoviesContextProvider>
     <Routes>
@@ -49,12 +54,17 @@ const App = () => {
       <Route path="/people/:id" element= {<PeopleDetailPage/>}/>
       <Route path="/TV/:id" element= {<TVDetailPage/>}/>
       <Route path="/movies/:id" element={<MoviePage />} />
-      <Route path="/:page" element={<HomePage />} />
+      
       <Route path="/login" element ={<LoginPage/>}/>
       <Route path="*" element={ <Navigate to="/1" /> } />
+      <Route element={<ProtectedRoutes />}>
+      <Route path="/:page" element={<HomePage />} />
+          
+          </Route>
 
     </Routes>
     </MoviesContextProvider>
+    </AuthProvider>
   </BrowserRouter>
   <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
