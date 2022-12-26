@@ -5,6 +5,7 @@ import genres  from './genres';
 import dotenv from 'dotenv';
 import movieModel from '../api/movies/movieModel';
 import movies from './movies.js';
+
 dotenv.config();
 
 // deletes all user documents in collection and inserts test data
@@ -43,6 +44,7 @@ if (process.env.SEED_DB) {
   loadUsers();
   loadGenres();
   loadMovies();
+  
 }
 
 
