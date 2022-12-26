@@ -28,7 +28,8 @@ app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/people', peopleRouter);
 app.use('/api/TV', TVRouter);
-app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+// app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+app.use('/api/movies', moviesRouter);
 
 app.use(errHandler);
 app.listen(port, () => {

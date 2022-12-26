@@ -10,6 +10,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
+import AuthHeader from "./authHeader";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
@@ -24,7 +25,7 @@ const SiteHeader = ({ history }) => {
   const navigate = useNavigate();
 
   const menuOptions = [
-    { label: "Login", path:"/login"},
+
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favorites" },
     { label: "Upcoming", path: "/movies/upcoming" },
@@ -51,6 +52,9 @@ const SiteHeader = ({ history }) => {
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
+          </Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          <AuthHeader />
           </Typography>
             {isMobile ? (
               <>

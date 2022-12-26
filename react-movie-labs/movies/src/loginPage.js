@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { AuthContext } from '../authContext';
+import { AuthContext } from './authContext';
 import { Link } from "react-router-dom";
-
+import './login.css'
 const LoginPage = props => {
   const context = useContext(AuthContext);
 
@@ -23,20 +23,28 @@ const LoginPage = props => {
   }
 
   return (
+    <div className="App">
+      <div className="auth-form-container">
     <>
-      <h2>Login page</h2>
-      <p>You must log in to view the protected pages </p>
-      <input id="username" placeholder="user name" onChange={e => {
+    
+      <h2 className="label">Login page</h2>
+      <p className="label">You must log in to view the protected pages </p>
+      <label htmlFor="username">User name</label>
+      <input className="input" id="username" placeholder="user name" onChange={e => {
         setUserName(e.target.value);
       }}></input><br />
-      <input id="password" type="password" placeholder="password" onChange={e => {
+      <label htmlFor="password">Password</label>
+      <input className="input" id="password" type="password" placeholder="password" onChange={e => {
         setPassword(e.target.value);
       }}></input><br />
       {/* Login web form  */}
-      <button onClick={login}>Log in</button>
-      <p>Not Registered?
-      <Link to="/signup">Sign Up!</Link></p>
+      <button className="button" onClick={login}>Log in</button>
+      <p className="link-btn">Not Registered? </p>
+      <p> <Link to="/signup">Sign Up!</Link></p>
+      
     </>
+    </div>
+    </div>
   );
 };
 
