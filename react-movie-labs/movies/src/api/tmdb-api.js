@@ -1,3 +1,4 @@
+
 export const getMovies = (args) => {
   const[,pages] = args.queryKey;
   const{page} = pages;
@@ -236,3 +237,4 @@ export const getMovieReviews = (id) => {
       return json.results;
     });
 };
+

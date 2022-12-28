@@ -18,7 +18,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage'
 import TVPage from "./pages/TVPage";
 import TVDetailPage from "./pages/TVDetailPage";
 import LoginPage from "./loginPage";
-import {Auth0Provider} from '@auth0/auth0-react';
+import { Auth0Provider } from '@auth0/auth0-react';
 import AuthProvider from "./authContext";
 import ProtectedRoutes from "./protectedRoutes";
 import SignUpPage from "./signUpPage";
@@ -28,7 +28,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 360000,
-      refetchInterval: 360000, 
+      refetchInterval: 360000,
       refetchOnWindowFocus: false
     },
   },
@@ -37,35 +37,35 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-    <AuthProvider>
-       
-    <SiteHeader />
-    <MoviesContextProvider>
-    <Routes>
-    <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-      <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-      <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-      <Route path="/movies/upcoming" element={<UpcomingPage />} />
-      <Route path="/movies/toprated" element= {<TopratedPage/>}/>
-      <Route path="/movies/people" element= {<PeoplePage/>}/>
-      <Route path="/movies/tv" element= {<TVPage/>}/>
-      <Route path="/people/:id" element= {<PeopleDetailPage/>}/>
-      <Route path="/TV/:id" element= {<TVDetailPage/>}/>
-      <Route path="/movies/:id" element={<MoviePage />} />
-      <Route path="/signup" element={ <SignUpPage /> } />
-      <Route path="/login" element ={<LoginPage/>}/>
-      <Route path="*" element={ <Navigate to="/1" /> } />
-      <Route element={<ProtectedRoutes />}>
-      <Route path="/:page" element={<HomePage />} />
-          
-          </Route>
+      <BrowserRouter>
+        <AuthProvider>
 
-    </Routes>
-    </MoviesContextProvider>
-    </AuthProvider>
-  </BrowserRouter>
-  <ReactQueryDevtools initialIsOpen={false} />
+          <SiteHeader />
+          <MoviesContextProvider>
+            <Routes>
+              <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+              <Route path="/reviews/:id" element={<MovieReviewPage />} />
+              <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+              <Route path="/movies/upcoming" element={<UpcomingPage />} />
+              <Route path="/movies/toprated" element={<TopratedPage />} />
+
+              <Route path="/people/:id" element={<PeopleDetailPage />} />
+              <Route path="/TV/:id" element={<TVDetailPage />} />
+              <Route path="/movies/:id" element={<MoviePage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="*" element={<Navigate to="/1" />} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/:page" element={<HomePage />} />
+                <Route path="/movies/people" element={<PeoplePage />} />
+                <Route path="/movies/tv" element={<TVPage />} />
+              </Route>
+
+            </Routes>
+          </MoviesContextProvider>
+        </AuthProvider>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
@@ -73,11 +73,11 @@ const App = () => {
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
-      domain = {domain}
-      clientId = {clientId}
-      redirectUri = {window.location.origin}>
-<App />
-</Auth0Provider>
-</React.StrictMode>
-,document.getElementById("root")
+      domain={domain}
+      clientId={clientId}
+      redirectUri={window.location.origin}>
+      <App />
+    </Auth0Provider>
+  </React.StrictMode>
+  , document.getElementById("root")
 );
