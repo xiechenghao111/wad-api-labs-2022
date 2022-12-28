@@ -58,7 +58,7 @@ router.put('/:id', async (req, res) => {
 
 router.post('/:userName/favorites', asyncHandler(async (req, res) => {
   console.log(req.body)
-  const newFavorite = req.body.id;
+  const newFavorite = req.body.newFavorite;
   const userName = req.params.userName;
    //const movie = await movieModel.findByMovieDBId(newFavorite);
   const user = await User.findByUserName(userName);
@@ -72,7 +72,7 @@ router.post('/:userName/favorites', asyncHandler(async (req, res) => {
 }));
 
 router.post('/:username/movie/:id/favorites', asyncHandler(async (req, res) => {
-  const newFavorite = req.params.id;
+  const newFavorite = req.body.newFavorite;
   const userName = req.params.username;
   const user = await User.findByUserName(userName);
   const index = user.favorites.indexOf(newFavorite)

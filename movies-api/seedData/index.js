@@ -5,6 +5,8 @@ import genres  from './genres';
 import dotenv from 'dotenv';
 import movieModel from '../api/movies/movieModel';
 import movies from './movies.js';
+import reviewModel from '../api/reviews/reviewModel';
+import review from './review.js';
 
 dotenv.config();
 
@@ -17,6 +19,16 @@ async function loadUsers() {
     console.info(`${users.length} users were successfully stored.`);
   } catch (err) {
     console.error(`failed to Load user Data: ${err}`);
+  }
+}
+async function loadReviews() {
+  console.log('load review Data');
+  try {
+    await reviewModel.deleteMany();
+    await reviewModel.collection.insertMany(review);
+    console.info(`${review.length} reviews were successfully stored.`);
+  } catch (err) {
+    console.error(`failed to Load review Data: ${err}`);
   }
 }
 async function loadGenres() {
@@ -44,6 +56,7 @@ if (process.env.SEED_DB) {
   loadUsers();
   loadGenres();
   loadMovies();
+  loadReviews();
   
 }
 
