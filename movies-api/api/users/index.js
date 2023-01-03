@@ -20,7 +20,7 @@ router.post('/',asyncHandler( async (req, res, next) => {
     if (req.query.action === 'register') {
       var username = req.body.username;
       var password = req.body.password;
-      if (username.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/) || password.match(/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)){
+      if (username.match( /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/)||password.match(/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)){
         res.status(201).json({code: 201, msg: 'Successful created new user.'});
       
       }
@@ -57,16 +57,20 @@ router.put('/:id', async (req, res) => {
 });
 
 router.post('/:userName/favorites', asyncHandler(async (req, res) => {
-  console.log(req.body)
+  
   const newFavorite = req.body.newFavorite;
   const userName = req.params.userName;
-   //const movie = await movieModel.findByMovieDBId(newFavorite);
+
   const user = await User.findByUserName(userName);
+
   if (user.favorites.includes(newFavorite)) {
+  
+
       res.status(201).json({code: 201, msg: 'Already exists in favorites.'})
   } else {
       await user.favorites.push(newFavorite);
-      await user.save(); 
+      await user.save();
+      console.log(user) 
       res.status(201).json(user); 
   }
 }));
@@ -84,7 +88,11 @@ router.post('/:username/movie/:id/favorites', asyncHandler(async (req, res) => {
 
 router.get('/:userName/favorites', asyncHandler( async (req, res) => {
   const userName = req.params.userName;
+  const users = await User.find();
+  console.log(users)
   const user = await User.findByUserName(userName);
+  
   res.status(200).json(user.favorites);
+  
 }));
 export default router;

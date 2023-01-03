@@ -8,7 +8,6 @@ import TVRouter from './api/TV';
 import reviewsRoute from './api/reviews';
 import './db';
 import './seedData';
-import session from 'express-session';
 import passport from './authenticate';
 dotenv.config();
 const errHandler = (err, req, res, next) => {
@@ -25,14 +24,16 @@ app.use(passport.initialize());
 
 const port = process.env.PORT;
 app.use(express.json());
+
+
 app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/people', peopleRouter);
+
 app.use('/api/reviews', reviewsRoute);
 app.use('/api/TV', TVRouter);
-// app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
-app.use('/api/movies', moviesRouter);
 
+app.use('/api/movies', moviesRouter);
+app.use('/api/people', passport.authenticate('jwt', {session: false}), peopleRouter);
 app.use(errHandler);
 app.listen(port, () => {
   console.info(`Server running at ${port}`);

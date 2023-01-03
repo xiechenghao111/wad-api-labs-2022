@@ -39,7 +39,7 @@ const MoviesContextProvider = (props) => {
     newFavorites = getFavorites(username, movie)
     setFavorites(newFavorites)
   };
-
+  
   const removeFromFavorites = (movie) => {
     setFavorites( favorites.filter(
       (mId) => mId !== movie.id

@@ -19,6 +19,8 @@ export const signup = (username, password) => {
 };
 
 export const addFavorite = (username, newFavorite) => {
+    console.log(username)
+    console.log(newFavorite)
     return fetch(`/api/users/${username}/favorites`, {
       headers: {
           'Content-Type': 'application/json'

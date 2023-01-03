@@ -62,7 +62,12 @@ export const gettopratedMovie = () => {
 
 export const getpeople = () => {
   return fetch(
-    `/api/people/tmdb/popular`
+    `/api/people/tmdb/popular`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      },
+      method: 'get'
+    }
   ).then((response) => {
     if (!response.ok) {
       throw new Error(response.json().message);

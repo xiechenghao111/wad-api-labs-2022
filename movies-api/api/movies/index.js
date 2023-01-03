@@ -65,8 +65,18 @@ router.get('/tmdb/popular', asyncHandler( async(req, res) => {
   }));
 
   router.get('/tmdb/movies/:id', asyncHandler( async(req, res) => {
+    const id =  parseInt(req.params.id);
+    const Movies = await getMovies();
     const MovieDetail = await getMovieDetail(req.params.id);
-    res.status(200).json(MovieDetail);
+    console.log(MovieDetail)
+    if (Movies.id === id){
+    res.status(200).json(MovieDetail);}
+    else{
+      res.status(404).json({
+        message: 'The resource you requested could not be found.',
+        status_code: 404
+    });
+    }
   }));
   router.get('/tmdb/movies/:id/images', asyncHandler( async(req, res,) => {
     const MovieImages = await getMovieImages(req.params.id);

@@ -45,10 +45,7 @@ const App = () => {
             <Routes>
               <Route path="/reviews/form" element={<AddMovieReviewPage />} />
               <Route path="/reviews/:id" element={<MovieReviewPage />} />
-              <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-              <Route path="/movies/upcoming" element={<UpcomingPage />} />
-              <Route path="/movies/toprated" element={<TopratedPage />} />
-
+            
               <Route path="/people/:id" element={<PeopleDetailPage />} />
               <Route path="/TV/:id" element={<TVDetailPage />} />
               <Route path="/movies/:id" element={<MoviePage />} />
@@ -59,8 +56,11 @@ const App = () => {
                 <Route path="/:page" element={<HomePage />} />
                 <Route path="/movies/people" element={<PeoplePage />} />
                 <Route path="/movies/tv" element={<TVPage />} />
-              </Route>
+                <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+              <Route path="/movies/upcoming" element={<UpcomingPage />} />
+              <Route path="/movies/toprated" element={<TopratedPage />} />
 
+              </Route>
             </Routes>
           </MoviesContextProvider>
         </AuthProvider>
